@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class Web_Manager : IPaymentPlatform
+public class Web_Manager : MonoBehaviour, IPaymentPlatform
 {
     public void BuyDiamonds()
     {
-        Debug.Log("Symulacja zakupu diamentów na platformie Web...");
-        // Logika Web bêdzie dodana póŸniej (np. PayPal/Przelewy24)
+        Debug.Log("Simulating diamond purchase on Web platform...");
+        // Web payment logic (e.g., PayPal/Przelewy24) will be added here later
     }
 
     public void BuyHeroSkin()
     {
-        Debug.Log("Symulacja zakupu skina na platformie Web...");
-        // Dodaj logikê Web dla skinów
+        Debug.Log("Simulating hero skin purchase on Web platform...");
+        // Add logic for deducting diamonds and activating the skin
     }
 }

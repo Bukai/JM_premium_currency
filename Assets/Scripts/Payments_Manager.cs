@@ -9,15 +9,16 @@ public class Payments_Manager : MonoBehaviour
         InitializePaymentPlatform();
     }
 
-    // Initializes the correct payment platform based on the current platform
     private void InitializePaymentPlatform()
     {
 #if UNITY_STANDALONE
-        paymentPlatform = new Steam_Manager();
+        GameObject steamManagerObject = new GameObject("SteamManager");
+        paymentPlatform = steamManagerObject.AddComponent<Steam_Manager>();
 #elif UNITY_ANDROID
-        paymentPlatform = new Googleplay_Manager(); // Google Play for Android builds
+        GameObject googlePlayManagerObject = new GameObject("GooglePlayManager");
+        paymentPlatform = googlePlayManagerObject.AddComponent<GooglePlay_Manager>();
 #elif UNITY_WEBGL
-        paymentPlatform = new Web_Manager(); // Web platform (e.g., PayPal)
+        paymentPlatform = new Web_Manager(); // Web_Manager does not need to inherit MonoBehaviour
 #else
         Debug.LogError("Unsupported platform for payments!");
 #endif
