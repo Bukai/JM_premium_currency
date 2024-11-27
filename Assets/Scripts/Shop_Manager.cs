@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Shop_Manager : MonoBehaviour
 {
+    public int skinCost = 250;
+
     public void BuyHeroSkin()
     {
-        int skinCost = 250;
-
         if (PlayerInventory.Diamonds >= skinCost)
         {
             PlayerInventory.DeductDiamonds(skinCost);

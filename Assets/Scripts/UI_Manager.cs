@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private Payments_Manager paymentsManager;
     [SerializeField] private Shop_Manager shopManager;
     [SerializeField] private TextMeshProUGUI diamondCountText;
+    [SerializeField] private Button buySkinButton;
 
     void Start()
     {
@@ -44,12 +46,22 @@ public class UI_Manager : MonoBehaviour
         {
             shopManager.BuyHeroSkin();
             UpdateDiamondCount(PlayerInventory.Diamonds);
+            UpdateBuySkinButtonState();
         }
         else
         {
             Debug.LogError("ShopManager reference is missing!");
         }
     }
+
+    private void UpdateBuySkinButtonState()
+    {
+        if (buySkinButton != null)
+        {
+            buySkinButton.interactable = PlayerInventory.Diamonds >= shopManager.skinCost;
+        }
+    }
+
 
     public void ChangePanel(int activePanelIndex)
     {
@@ -67,5 +79,7 @@ public class UI_Manager : MonoBehaviour
             tabsInactive[i].SetActive(i != activePanelIndex);
             tabsActive[i].SetActive(i == activePanelIndex);
         }
+
+        UpdateBuySkinButtonState();
     }
 }
