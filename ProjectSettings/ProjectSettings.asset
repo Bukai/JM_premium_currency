@@ -764,7 +764,9 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   scriptingDefineSymbols:
+    Android: STEAMWORKS_NET
     Standalone: STEAMWORKS_NET
+    Windows Store Apps: STEAMWORKS_NET
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

@@ -720,6 +720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 515050638}
   - component: {fileID: 515050639}
+  - component: {fileID: 515050640}
   m_Layer: 5
   m_Name: Shop
   m_TagString: Untagged
@@ -760,6 +761,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa6bfc3fbcfc9274b907f3a1aa2263b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &515050640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515050637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2485643212fd6764aaa5e27577caddf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &519420028
@@ -1064,7 +1077,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 631025557}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 774139270}
+        m_TargetAssemblyTypeName: UI_Manager, Assembly-CSharp
+        m_MethodName: OnBuyDiamondsButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &631025557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1393,12 +1418,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b3284b0d3f66b43808adfd39b8c267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imagePanelClose_1: {fileID: 1541714345}
-  imagePanelClose_2: {fileID: 1824686537}
-  imagePanelOpen_1: {fileID: 1320066741}
-  imagePanelOpen_2: {fileID: 98955874}
   PanelSkins: {fileID: 1849264156}
   PanelDiamonds: {fileID: 1764709551}
+  tabsInactive:
+  - {fileID: 1541714345}
+  - {fileID: 1824686537}
+  tabsActive:
+  - {fileID: 1320066741}
+  - {fileID: 98955874}
+  paymentsManager: {fileID: 622573098}
+  shopManager: {fileID: 515050640}
+  diamondCountText: {fileID: 1119908218}
 --- !u!1 &878132295
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,7 +2149,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199215025}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2370,7 +2400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1406530183}
   m_Layer: 5
-  m_Name: CoinsInfo
+  m_Name: DiamondsInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2597,8 +2627,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 774139270}
         m_TargetAssemblyTypeName: UI_Manager, Assembly-CSharp
-        m_MethodName: changePanelToSkin
-        m_Mode: 1
+        m_MethodName: ChangePanel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2959,12 +2989,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 774139270}
         m_TargetAssemblyTypeName: UI_Manager, Assembly-CSharp
-        m_MethodName: changePanelToDiamonds
-        m_Mode: 1
+        m_MethodName: ChangePanel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3167,7 +3197,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2087529210}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 774139270}
+        m_TargetAssemblyTypeName: UI_Manager, Assembly-CSharp
+        m_MethodName: OnBuyHeroSkinButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2087529210
 MonoBehaviour:
   m_ObjectHideFlags: 0

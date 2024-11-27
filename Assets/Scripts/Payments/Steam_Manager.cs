@@ -1,3 +1,4 @@
+#if UNITY_STANDALONE
 using UnityEngine;
 using Steamworks;
 
@@ -51,3 +52,4 @@ public class Steam_Manager : MonoBehaviour, IPaymentPlatform
         }
     }
 }
+#endif
