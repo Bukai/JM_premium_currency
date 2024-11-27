@@ -775,6 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2485643212fd6764aaa5e27577caddf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skinCost: 250
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1429,6 +1430,7 @@ MonoBehaviour:
   paymentsManager: {fileID: 622573098}
   shopManager: {fileID: 515050640}
   diamondCountText: {fileID: 1119908218}
+  buySkinButton: {fileID: 2087529209}
 --- !u!1 &878132295
 GameObject:
   m_ObjectHideFlags: 0
