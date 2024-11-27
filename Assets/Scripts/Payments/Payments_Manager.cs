@@ -35,16 +35,4 @@ public class Payments_Manager : MonoBehaviour
             Debug.LogError("No payment system initialized!");
         }
     }
-
-    public void BuyHeroSkin()
-    {
-        if (paymentPlatform != null)
-        {
-            paymentPlatform.BuyHeroSkin();
-        }
-        else
-        {
-            Debug.LogError("No payment system initialized!");
-        }
-    }
 }

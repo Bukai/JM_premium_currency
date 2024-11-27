@@ -9,15 +9,14 @@ public class GooglePlay_Manager : MonoBehaviour, IPaymentPlatform, IDetailedStor
 
     private async void Awake()
     {
-        await InitializeUnityGamingServices(); // Ensure Unity Gaming Services is initialized
-        InitializeIAP(); // Initialize Unity IAP
+        await InitializeUnityGamingServices();
+        InitializeIAP();
     }
 
     private async System.Threading.Tasks.Task InitializeUnityGamingServices()
     {
         try
         {
-            // Initialize Unity Gaming Services
             await UnityServices.InitializeAsync();
             Debug.Log("Unity Gaming Services initialized successfully.");
         }
@@ -30,8 +29,8 @@ public class GooglePlay_Manager : MonoBehaviour, IPaymentPlatform, IDetailedStor
     private void InitializeIAP()
     {
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-        builder.AddProduct("diamonds_pack", ProductType.Consumable); // Register product
-        UnityPurchasing.Initialize(this, builder); // Initialize Unity IAP
+        builder.AddProduct("diamonds_pack", ProductType.Consumable);
+        UnityPurchasing.Initialize(this, builder);
     }
 
     public void BuyDiamonds()
@@ -46,20 +45,12 @@ public class GooglePlay_Manager : MonoBehaviour, IPaymentPlatform, IDetailedStor
         }
     }
 
-    // Handle purchase of hero skin
-    public void BuyHeroSkin()
-    {
-        Debug.Log("Purchasing hero skin using diamonds...");
-    }
-
-    // Called when Unity IAP is successfully initialized
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
         storeController = controller;
         Debug.Log("Google Play IAP initialized.");
     }
 
-    // Called when Unity IAP initialization fails
     public void OnInitializeFailed(InitializationFailureReason error, string message)
     {
         Debug.LogError($"IAP initialization failed: {error}. Message: {message}");
@@ -70,13 +61,12 @@ public class GooglePlay_Manager : MonoBehaviour, IPaymentPlatform, IDetailedStor
         Debug.LogError($"IAP initialization failed: {error}");
     }
 
-    // Called when a purchase is processed successfully
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
         if (args.purchasedProduct.definition.id == "diamonds_pack")
         {
             Debug.Log("Diamonds purchase completed successfully!");
-            // Add diamonds to player's account
+            PlayerInventory.AddDiamonds(300);
         }
         else
         {
@@ -86,7 +76,6 @@ public class GooglePlay_Manager : MonoBehaviour, IPaymentPlatform, IDetailedStor
         return PurchaseProcessingResult.Complete;
     }
 
-    // Called when a purchase fails
     public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
     {
         Debug.LogError($"Purchase failed for product {product.definition.id}. Reason: {failureDescription.reason}. Message: {failureDescription.message}");
