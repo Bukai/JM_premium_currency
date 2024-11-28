@@ -13,14 +13,8 @@ public class Steam_Manager : MonoBehaviour, IPaymentPlatform
 
     private void InitializeSteam()
     {
-        if (SteamAPI.RestartAppIfNecessary((AppId_t)480))
-        {
-            Debug.LogError("Steam Client is not running or the App ID is invalid.");
-            Application.Quit();
-            return;
-        }
-
         isSteamInitialized = SteamAPI.Init();
+
         if (isSteamInitialized)
         {
             Debug.Log("Steamworks initialized successfully.");
