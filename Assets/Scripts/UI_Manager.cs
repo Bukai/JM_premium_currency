@@ -4,16 +4,19 @@ using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
+    [SerializeField] private Payments_Manager paymentsManager;
+    [SerializeField] private Shop_Manager shopManager;
+
     [SerializeField] private GameObject PanelSkins;
     [SerializeField] private GameObject PanelDiamonds;
     [SerializeField] private GameObject[] tabsInactive;
     [SerializeField] private GameObject[] tabsActive;
-    [SerializeField] private Payments_Manager paymentsManager;
-    [SerializeField] private Shop_Manager shopManager;
-    [SerializeField] private TextMeshProUGUI diamondCountText;
+    [SerializeField] private GameObject equipSkinIndicator;
+
     [SerializeField] private Button buySkinButton;
     [SerializeField] private Button equipSkinButton;
-    [SerializeField] private GameObject equipSkinIndicator;
+
+    [SerializeField] private TextMeshProUGUI diamondCountText;
 
     void Start()
     {
@@ -58,9 +61,10 @@ public class UI_Manager : MonoBehaviour
 
     public void OnEquipHeroSkinButton()
     {
-        if (shopManager != null && shopManager.IsSkinPurchased)
+        if (shopManager != null && shopManager.IsSkinPurchased && !shopManager.IsSkinEquipped)
         {
             shopManager.EquipHeroSkin();
+            UpdateSkinButtonsState();
             UpdateEquipIndicator();
         }
     }
@@ -69,12 +73,14 @@ public class UI_Manager : MonoBehaviour
     {
         if (buySkinButton != null)
         {
+            buySkinButton.gameObject.SetActive(!shopManager.IsSkinPurchased);
             buySkinButton.interactable = !shopManager.IsSkinPurchased && PlayerInventory.Diamonds >= shopManager.skinCost;
         }
 
         if (equipSkinButton != null)
         {
-            equipSkinButton.interactable = shopManager.IsSkinPurchased;
+            equipSkinButton.gameObject.SetActive(shopManager.IsSkinPurchased);
+            equipSkinButton.interactable = shopManager.IsSkinPurchased && !shopManager.IsSkinEquipped;
         }
     }
 

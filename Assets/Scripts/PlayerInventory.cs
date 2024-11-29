@@ -2,24 +2,37 @@ using UnityEngine;
 
 public static class PlayerInventory
 {
-    public static int Diamonds { get; private set; } = 0;
+    private const string DiamondsKey = "PlayerDiamonds";
+
+    public static int Diamonds
+    {
+        get => PlayerPrefs.GetInt(DiamondsKey, 0);
+        private set
+        {
+            PlayerPrefs.SetInt(DiamondsKey, value);
+            PlayerPrefs.Save();
+        }
+    }
 
     public static void AddDiamonds(int amount)
     {
-        Diamonds += amount;
-        Debug.Log($"Added {amount} diamonds. Total: {Diamonds}");
+        if (amount > 0)
+        {
+            Diamonds += amount;
+            Debug.Log($"Added {amount} diamonds. Total: {Diamonds}");
+        }
     }
 
     public static void DeductDiamonds(int amount)
     {
-        if (Diamonds >= amount)
+        if (amount > 0 && Diamonds >= amount)
         {
             Diamonds -= amount;
-            Debug.Log($"Deducted {amount} diamonds. Remaining: {Diamonds}");
+            Debug.Log($"Deducted {amount} diamonds. Total: {Diamonds}");
         }
         else
         {
-            Debug.LogError("Not enough diamonds to deduct.");
+            Debug.LogError("Not enough diamonds to deduct or invalid amount.");
         }
     }
 }
