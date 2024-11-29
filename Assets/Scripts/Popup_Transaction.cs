@@ -5,6 +5,6 @@ public class Popup_Transaction : MonoBehaviour
 {
     public void ClosePopup()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 }
