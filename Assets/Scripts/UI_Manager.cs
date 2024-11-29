@@ -17,6 +17,7 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private Button equipSkinButton;
 
     [SerializeField] private TextMeshProUGUI diamondCountText;
+    [SerializeField] private TextMeshProUGUI buySkinText;
 
     void Start()
     {
@@ -42,10 +43,6 @@ public class UI_Manager : MonoBehaviour
         {
             paymentsManager.BuyDiamonds();
             UpdateDiamondCount(PlayerInventory.Diamonds);
-        }
-        else
-        {
-            Debug.LogError("Payments_Manager reference is missing!");
         }
     }
 
@@ -73,8 +70,22 @@ public class UI_Manager : MonoBehaviour
     {
         if (buySkinButton != null)
         {
+            int missingDiamonds = shopManager.skinCost - PlayerInventory.Diamonds;
+
             buySkinButton.gameObject.SetActive(!shopManager.IsSkinPurchased);
-            buySkinButton.interactable = !shopManager.IsSkinPurchased && PlayerInventory.Diamonds >= shopManager.skinCost;
+
+            if (PlayerInventory.Diamonds >= shopManager.skinCost)
+            {
+                buySkinButton.interactable = true;
+                buySkinText.text = $"{shopManager.skinCost}";
+                buySkinText.color = new Color(0, 1, 0);
+            }
+            else
+            {
+                buySkinButton.interactable = false;
+                buySkinText.text = $"{missingDiamonds}";
+                buySkinText.color = new Color(1, 0, 0);
+            }
         }
 
         if (equipSkinButton != null)
