@@ -66,7 +66,7 @@ public class GooglePlay_Manager : MonoBehaviour, IPaymentPlatform, IDetailedStor
         if (args.purchasedProduct.definition.id == "diamonds_pack")
         {
             Debug.Log("Diamonds purchase completed successfully!");
-            PlayerInventory.AddDiamonds(300);
+            PlayerInventory.AddDiamonds(200);
         }
         else
         {

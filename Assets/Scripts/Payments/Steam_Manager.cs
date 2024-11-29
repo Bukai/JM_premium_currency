@@ -34,7 +34,7 @@ public class Steam_Manager : MonoBehaviour, IPaymentPlatform
         }
 
         Debug.Log("Simulating diamond purchase via Steam...");
-        PlayerInventory.AddDiamonds(300);
+        PlayerInventory.AddDiamonds(200);
     }
 
     private void OnDestroy()
