@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Shop_Manager : MonoBehaviour
 {
+    [SerializeField] private GameObject purchasedSkinText;
+
     private const string SkinPurchasedKey = "SkinPurchased";
     private const string SkinEquippedKey = "SkinEquipped";
 
@@ -13,6 +15,7 @@ public class Shop_Manager : MonoBehaviour
     private void Awake()
     {
         LoadSkinState();
+        purchasedSkinText.SetActive(false);
     }
 
     public void BuyHeroSkin()
@@ -27,6 +30,7 @@ public class Shop_Manager : MonoBehaviour
         {
             PlayerInventory.DeductDiamonds(skinCost);
             IsSkinPurchased = true;
+            purchasedSkinText.SetActive(true);
             SaveSkinState();
             Debug.Log("Hero skin purchased successfully!");
         }
