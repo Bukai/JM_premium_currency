@@ -12,10 +12,14 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private Shop_Manager shopManager;
     [SerializeField] private TextMeshProUGUI diamondCountText;
     [SerializeField] private Button buySkinButton;
+    [SerializeField] private Button equipSkinButton;
+    [SerializeField] private GameObject equipSkinIndicator;
 
     void Start()
     {
         UpdateDiamondCount(PlayerInventory.Diamonds);
+        UpdateSkinButtonsState();
+        UpdateEquipIndicator();
         ChangePanel(0);
     }
 
@@ -25,6 +29,8 @@ public class UI_Manager : MonoBehaviour
         {
             diamondCountText.text = $"Diamonds: {amount}";
         }
+
+        UpdateSkinButtonsState();
     }
 
     public void OnBuyDiamondsButton()
@@ -42,26 +48,43 @@ public class UI_Manager : MonoBehaviour
 
     public void OnBuyHeroSkinButton()
     {
-        if (shopManager != null)
+        if (shopManager != null && !shopManager.IsSkinPurchased)
         {
             shopManager.BuyHeroSkin();
             UpdateDiamondCount(PlayerInventory.Diamonds);
-            UpdateBuySkinButtonState();
-        }
-        else
-        {
-            Debug.LogError("ShopManager reference is missing!");
+            UpdateSkinButtonsState();
         }
     }
 
-    private void UpdateBuySkinButtonState()
+    public void OnEquipHeroSkinButton()
+    {
+        if (shopManager != null && shopManager.IsSkinPurchased)
+        {
+            shopManager.EquipHeroSkin();
+            UpdateEquipIndicator();
+        }
+    }
+
+    private void UpdateSkinButtonsState()
     {
         if (buySkinButton != null)
         {
-            buySkinButton.interactable = PlayerInventory.Diamonds >= shopManager.skinCost;
+            buySkinButton.interactable = !shopManager.IsSkinPurchased && PlayerInventory.Diamonds >= shopManager.skinCost;
+        }
+
+        if (equipSkinButton != null)
+        {
+            equipSkinButton.interactable = shopManager.IsSkinPurchased;
         }
     }
 
+    private void UpdateEquipIndicator()
+    {
+        if (equipSkinIndicator != null)
+        {
+            equipSkinIndicator.SetActive(shopManager.IsSkinEquipped);
+        }
+    }
 
     public void ChangePanel(int activePanelIndex)
     {
@@ -80,6 +103,6 @@ public class UI_Manager : MonoBehaviour
             tabsActive[i].SetActive(i == activePanelIndex);
         }
 
-        UpdateBuySkinButtonState();
+        UpdateSkinButtonsState();
     }
 }
