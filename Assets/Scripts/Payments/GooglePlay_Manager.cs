@@ -67,6 +67,7 @@ public class GooglePlay_Manager : MonoBehaviour, IPaymentPlatform, IDetailedStor
         {
             Debug.Log("Diamonds purchase completed successfully!");
             PlayerInventory.AddDiamonds(200);
+            PopupManager.Instance?.ShowPopup();
         }
         else
         {
